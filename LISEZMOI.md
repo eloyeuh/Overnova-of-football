@@ -1,4 +1,4 @@
-# Carrière Foot · site autonome
+﻿# Carrière Foot · site autonome
 
 Le jeu complet, hors de Claude. Deux services gratuits :
 
@@ -9,34 +9,38 @@ Aucune carte bancaire n'est demandée. Les intitulés des consoles peuvent varie
 
 ## Contenu du dossier
 
+Tous les fichiers sont à plat, sans sous-dossier : sur GitHub, on les glisse tous d'un coup.
+
 | Fichier | Rôle |
 |---|---|
 | `index.html` | La page du site |
-| `css/style.css` | Le design (les couleurs sont en haut du fichier) |
-| `js/firebase-config.js` | **À remplir** avec la configuration de ton projet Firebase |
-| `js/data.js` | Effectifs, légendes, packs, entraîneurs |
-| `js/engine.js` | Formations, simulateur de match, objectifs joueurs |
-| `js/logic.js` | Règles : budget, gains, packs, coupes, enchères, saisons |
-| `js/store.js` | Lien avec la base de données |
-| `js/ui.js` | Affichage des pages |
-| `vendor/` | Bibliothèque officielle Firebase (ne pas modifier) |
+| `style.css` | Le design (les couleurs sont en haut du fichier) |
+| `firebase-config.js` | La configuration de ton projet Firebase (déjà remplie) |
+| `data.js` | Effectifs, légendes, packs, entraîneurs |
+| `engine.js` | Formations, simulateur de match, objectifs joueurs |
+| `logic.js` | Règles : budget, gains, packs, coupes, enchères, saisons |
+| `store.js` | Lien avec la base de données |
+| `ui.js` | Affichage des pages |
+| `firebase-sdk.js` | Bibliothèque officielle Firebase (ne pas modifier) |
 | `firestore.rules` | Règles de sécurité à coller dans Firebase |
 
 ## Mise en ligne (une seule fois, environ 15 minutes)
 
 ### A. Firebase (la base de données)
 
-1. Va sur https://console.firebase.google.com avec ton compte Google → **Créer un projet** (ex. `carriere-foot`). Tu peux désactiver Google Analytics.
-2. Menu **Créer › Firestore Database** → **Créer une base de données** → mode **production** → emplacement **europe-west9 (Paris)** (choix définitif).
-3. Onglet **Règles** : remplace tout par le contenu de `firestore.rules`, puis **Publier**.
-4. Menu **Créer › Authentication** → **Commencer** → onglet **Méthode de connexion** → **Google** → **Activer** → choisis ton e-mail d'assistance → **Enregistrer**.
-5. ⚙ **Paramètres du projet** → section **Vos applications** → icône **Web `</>`** → nom `site` → **Enregistrer l'application** (pas besoin de Firebase Hosting). Firebase affiche un objet `firebaseConfig` : garde cette page ouverte.
+La console Firebase peut être en français ou en anglais : les deux intitulés sont indiqués.
+
+1. **Créer le projet** : va sur https://console.firebase.google.com avec ton compte Google → **Créer un projet** (*Create a new Firebase project*) → nom `carriere-foot` → accepte les conditions → **Continuer**. Gemini et Google Analytics : tu peux les désactiver → **Créer le projet**. Attends la fin puis **Continuer**.
+2. **Créer la base** : menu de gauche **Bases de données et stockage › Firestore** (*Databases & Storage › Firestore*) → **Créer une base de données** (*Create database*). Si une édition est demandée, choisis **Standard**. Emplacement : **europe-west9 (Paris)** (choix définitif) → mode **production** → **Créer**.
+3. **Règles de sécurité** : toujours dans Firestore, onglet **Règles** (*Rules*) → efface tout le texte → colle le contenu du fichier `firestore.rules` → **Publier** (*Publish*).
+4. **Connexion Google** : menu de gauche **Sécurité › Authentication** (*Security › Authentication*) → **Commencer** (*Get started*) → onglet **Méthode de connexion** (*Sign-in method*) → **Google** → interrupteur **Activer** (*Enable*) → choisis ton e-mail dans « Adresse e-mail d'assistance » → **Enregistrer** (*Save*).
+5. **Appli Web** : clique sur **Vue d'ensemble du projet** (*Project overview*, en haut à gauche) → bouton **+ Ajouter une application** (*Add app*) → icône **Web `</>`** → surnom `site` → ne coche pas Firebase Hosting → **Enregistrer l'application** (*Register app*). Firebase affiche un bloc `const firebaseConfig = { apiKey: "...", ... }` : copie-le et garde-le (tu peux le retrouver plus tard dans ⚙ **Paramètres du projet › Vos applications**).
 
 ### B. GitHub (l'hébergement)
 
 6. Crée un compte sur https://github.com, puis **New repository** : nom `carriere-foot`, **Public** (obligatoire pour GitHub Pages en gratuit) → **Create repository**.
-7. Clique sur **uploading an existing file**, glisse **tout le contenu** de ce dossier (pas le dossier lui-même : `index.html` doit être à la racine) → **Commit changes**.
-8. Ouvre `js/firebase-config.js` sur GitHub → icône crayon ✏️ → remplace les 6 valeurs par celles de l'étape 5 → **Commit changes**.
+7. Clique sur **uploading an existing file**, sélectionne **tous les fichiers** de ce dossier (Cmd+A sur Mac, Ctrl+A sur PC), glisse-les dans la page → **Commit changes**. La liste du dépôt doit afficher `index.html`, `style.css`, `firebase-sdk.js`, etc.
+8. (Seulement si tu changes de projet Firebase) Ouvre `firebase-config.js` sur GitHub → icône crayon ✏️ → remplace les 6 valeurs par celles de l'étape 5 → **Commit changes**.
 9. **Settings › Pages** → *Build and deployment* : **Deploy from a branch** → branche `main`, dossier `/ (root)` → **Save**. Après 1 à 2 minutes, l'adresse apparaît : `https://TON-PSEUDO.github.io/carriere-foot/`.
 
 ### C. Relier les deux
@@ -58,11 +62,11 @@ Aucune carte bancaire n'est demandée. Les intitulés des consoles peuvent varie
 
 **À la main** : sur GitHub, ouvre le fichier → crayon ✏️ → modifie → **Commit changes**. Repères utiles :
 
-- **Budget de départ, gains de match, prix et cotes des packs, coupes** : tout en haut de `js/logic.js`.
-- **Joueurs** : `js/data.js`. Une ligne = un joueur : `POSTE[/POSTE2]|prénom|nom|âge|note|potentiel`. Le prix se calcule tout seul à partir de la note.
-- **Formations** : `FORMATIONS` dans `js/engine.js` (poste, position x %, position y % sur le terrain).
-- **Couleurs** : variables en haut de `css/style.css`.
-- Si tu modifies des joueurs déjà en jeu, augmente `DATA_VERSION` dans `js/logic.js` : le site proposera de réinitialiser la partie.
+- **Budget de départ, gains de match, prix et cotes des packs, coupes** : tout en haut de `logic.js`.
+- **Joueurs** : `data.js`. Une ligne = un joueur : `POSTE[/POSTE2]|prénom|nom|âge|note|potentiel`. Le prix se calcule tout seul à partir de la note.
+- **Formations** : `FORMATIONS` dans `engine.js` (poste, position x %, position y % sur le terrain).
+- **Couleurs** : variables en haut de `style.css`.
+- Si tu modifies des joueurs déjà en jeu, augmente `DATA_VERSION` dans `logic.js` : le site proposera de réinitialiser la partie.
 
 ## Limites et sécurité
 

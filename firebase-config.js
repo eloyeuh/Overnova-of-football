@@ -1,12 +1,11 @@
 // ===== CONFIGURATION FIREBASE =====
-// Remplace les 6 valeurs ci-dessous par celles de ton projet :
-// console Firebase › ⚙ Paramètres du projet › Vos applications › ton appli Web › « Configuration du SDK » (objet firebaseConfig).
-// Tant que ce fichier n'est pas rempli, le site fonctionne en mode solo (partie enregistrée dans le navigateur).
+// Projet : overnova-of-football (console Firebase › ⚙ Paramètres du projet › Vos applications › appli Web « site »).
+// Ces valeurs ne sont pas secrètes : ce sont les règles de sécurité Firestore qui protègent la base.
 window.FIREBASE_CONFIG = {
-  apiKey: "COLLE_TON_apiKey_ICI",
-  authDomain: "ton-projet.firebaseapp.com",
-  projectId: "ton-projet",
-  storageBucket: "ton-projet.firebasestorage.app",
-  messagingSenderId: "000000000000",
-  appId: "1:000000000000:web:0000000000000000000000"
+  apiKey: "AIzaSyA9v4RS3AoeqxGYI1MJmy2r7G9f-ZDALQY",
+  authDomain: "overnova-of-football.firebaseapp.com",
+  projectId: "overnova-of-football",
+  storageBucket: "overnova-of-football.firebasestorage.app",
+  messagingSenderId: "784075694145",
+  appId: "1:784075694145:web:fea2e6eb9c96b420f9a6c0"
 };
